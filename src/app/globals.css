@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Satoshi-Regular';
+  src: url('/fonts/Satoshi-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Satoshi-Medium';
+  src: url('/fonts/Satoshi-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Satoshi-Bold';
+  src: url('/fonts/Satoshi-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Satoshi-Black';
+  src: url('/fonts/Satoshi-Black.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NotoSansTC-Medium';
+  src: url('/fonts/NotoSansTC-Medium.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NotoSansTC-Bold';
+  src: url('/fonts/NotoSansTC-Bold.ttf') format('opentype');
+}
+
+body {
+  @apply bg-primary-300;
+  color: var(--foreground);
+  font-family: 'Satoshi-Medium', 'NotoSansTC-Medium';
+}
+
+.custom-font-medium {
+  font-family: 'Satoshi-Medium', 'NotoSansTC-Medium';
+}
+
+.custom-font-bold {
+  font-family: 'Satoshi-Bold', 'NotoSansTC-Bold';
+}
+
+.custom-font-black {
+  font-family: 'Satoshi-Black';
+}
+
+.track {
+  position: absolute;
+  white-space: nowrap;
+  animation: marquee 32s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
