@@ -1,6 +1,7 @@
 import TurtleProfile from '@/components/TurtleProfile';
 import Banner from '@/components/Banner';
 import Carousel from '@/components/Carousel';
+import CarouselFull from '@/components/CarouseFull';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Banner />
       <TurtleProfile />
       <Carousel />
+      <CarouselFull />
     </div>
   );
 }

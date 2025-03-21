@@ -2,16 +2,17 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-const defaultImages: string[] = [
-  '/images/turtle1.jpeg',
-  '/images/turtle2.jpeg',
-  '/images/turtle-hero.jpeg',
-  '/images/turtle1-1.jpeg',
-  '/images/turtle2-2.jpeg',
-  '/images/turtle-hero2.jpeg',
-];
+const CarouselFull: React.FC = () => {
+  // Default images as a simple string array
+  const defaultImages: string[] = [
+    '/images/turtle1.jpeg',
+    '/images/turtle2.jpeg',
+    '/images/turtle-hero.jpeg',
+    '/images/turtle1-1.jpeg',
+    '/images/turtle2-2.jpeg',
+    '/images/turtle-hero2.jpeg',
+  ];
 
-const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -28,25 +29,21 @@ const Carousel: React.FC = () => {
 
     return [lastItem, ...defaultImages, firstItem];
   };
+
   const orderedSlides = getOrderedSlides();
 
-  const [translateValue, setTranslateValue] = useState(
-    `-${(currentIndex + 1) * 950}px`,
-  );
-  const [width, setWidth] = useState(`950px`);
-  const [contaierwidth, setContainerwidth] = useState(
-    `${orderedSlides.length * 950}px`,
-  );
-
+  // Navigate to the next slide
   const nextSlide = () => {
     if (!isTransitioning) {
       setIsTransitioning(true);
+
       setCurrentIndex((prev) =>
         prev === defaultImages.length - 1 ? 0 : prev + 1,
       );
     }
   };
 
+  // Navigate to the previous slide
   const prevSlide = () => {
     if (!isTransitioning) {
       setIsTransitioning(true);
@@ -56,6 +53,7 @@ const Carousel: React.FC = () => {
     }
   };
 
+  // Handle dot navigation
   const goToSlide = (index: number) => {
     if (!isTransitioning && index !== currentIndex) {
       setIsTransitioning(true);
@@ -100,42 +98,15 @@ const Carousel: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const updateTransform = () => {
-      if (window.innerWidth < 768) {
-        setTranslateValue(
-          `-${(currentIndex + 1) * (100 / orderedSlides.length)}%`,
-        );
-        setWidth(`${100 / orderedSlides.length}%`);
-        setContainerwidth(`${orderedSlides.length * 100}%`);
-      } else {
-        setTranslateValue(`-${(currentIndex + 1) * 950}px`);
-        setWidth('950px');
-        setContainerwidth(`${orderedSlides.length * 950}px`);
-      }
-    };
-
-    updateTransform();
-    window.addEventListener('resize', updateTransform);
-
-    return () => window.removeEventListener('resize', updateTransform);
-  }, [currentIndex, orderedSlides.length]);
-
   return (
     <div className="relative overflow-hidden w-full">
       {/* Main carousel container */}
       <div
         ref={carouselRef}
-        className="flex transition-transform duration-500 ease-in-out lg:ml-[240px]"
+        className="flex transition-transform duration-500 ease-in-out"
         style={{
-          // this is pc
-          //   transform: `translateX(-${(currentIndex + 1) * 950}px)`,
-          //this is
-          //transform: `translateX(-${(currentIndex + 1) * 100 / orderedSlides.length}%)`,
-          transform: `translateX(${translateValue})`,
-
-          height: '950px',
-          width: contaierwidth,
+          transform: `translateX(-${((currentIndex + 1) * 100) / orderedSlides.length}%)`,
+          width: `${orderedSlides.length * 100}%`,
         }}
       >
         {orderedSlides.map((imageSrc, index) => {
@@ -146,18 +117,15 @@ const Carousel: React.FC = () => {
               key={`slide-${index}`}
               className={`relative flex-grow-0 flex-shrink-0 transition-all duration-500 px-4 flex justify-center items-center`}
               style={{
-                // width: '950px',
-                //width: `${100 / orderedSlides.length}%`,
-                width: width,
-                height: 'auto',
-                transform: isCurrent ? 'scale(1.2)' : 'scale(1)',
+                width: `${100 / orderedSlides.length}%`,
+                transform: isCurrent ? 'scale(1.05)' : 'scale(1)',
                 zIndex: isCurrent ? 10 : 0,
               }}
             >
               <img
                 src={imageSrc}
                 alt={`Slide ${index}`}
-                className="w-full lg:w-[620px] lg:h-[500px] rounded-lg object-fit"
+                className="w-full h-auto rounded-lg object-cover"
                 style={{
                   maxHeight: '80vh',
                   transition: 'all 0.5s ease',
@@ -224,7 +192,7 @@ const Carousel: React.FC = () => {
               resetAutoplay();
             }}
             className={`w-2 h-2 rounded-full transition-all ${
-              currentIndex === index ? 'w-6 bg-black' : 'bg-white bg-opacity-50'
+              currentIndex === index ? 'w-6 bg-white' : 'bg-white bg-opacity-50'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
@@ -234,4 +202,4 @@ const Carousel: React.FC = () => {
   );
 };
 
-export default Carousel;
+export default CarouselFull;
