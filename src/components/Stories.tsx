@@ -21,7 +21,7 @@ const GET_ACTIVITIES_DATA = gql`
   }
 `;
 
-export default function InstagramStoryUI() {
+export default function Stories() {
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
