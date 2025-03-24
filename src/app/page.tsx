@@ -3,6 +3,7 @@ import Banner from '@/components/Banner';
 import Carousel from '@/components/Carousel';
 import CarouselFull from '@/components/CarouseFull';
 import Location from '@/components/Location';
+import InstagramStoryUI from '@/components/IgStories';
 
 export default function Home() {
   return (
@@ -10,8 +11,8 @@ export default function Home() {
       <Banner />
       <TurtleProfile />
       <Carousel />
-      {/* <CarouselFull /> */}
       <Location />
+      <InstagramStoryUI />
     </div>
   );
 }

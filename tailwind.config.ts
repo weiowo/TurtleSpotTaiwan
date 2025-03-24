@@ -13,6 +13,7 @@ const config: Config = {
           500: '#00CAD7',
         },
         secondary: {
+          50: '#F5FDFF',
           100: '#E5EEF0',
           300: '#50535E',
           500: '#161616',
