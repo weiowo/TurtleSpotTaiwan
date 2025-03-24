@@ -63,13 +63,13 @@ export default function TurtleProfile() {
           <div className="col-span-1 space-y-4">
             <p className="text-lg custom-font-bold">右臉：</p>
             <div className="relative w-[327px] h-[240px] md:w-[312px] md:h-[200px] lg:h-[262px] lg:w-[409px]">
-  <Image
-    src="/images/turtle2.jpeg"
-    alt="turtle2"
-    fill
-    className="rounded object-cover"
-  />
-</div>
+              <Image
+                src="/images/turtle2.jpeg"
+                alt="turtle2"
+                fill
+                className="rounded object-cover"
+              />
+            </div>
 
             <div className="hidden md:block mt-4 h-[1px] w-full bg-primary-300" />
           </div>

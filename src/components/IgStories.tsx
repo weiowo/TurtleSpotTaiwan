@@ -1,24 +1,45 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
-import { stories } from '@/lib/constants';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { gql, useQuery } from '@apollo/client';
+import client from '@/lib/apollo-client';
 import Marquee from './Marquee';
 import Logo from '@/components/icons/logo.svg';
+import Link from 'next/link';
+import ArrowLeft from '@/components/icons/arrow-left.svg';
+import ArrowRight from '@/components/icons/arrow-right.svg';
+import { Activity } from '@/lib/constants';
+
+const GET_ACTIVITIES_DATA = gql`
+  {
+    activities {
+      date
+      title
+      description
+      post_link
+    }
+  }
+`;
 
 export default function InstagramStoryUI() {
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const { data, loading, error } = useQuery<{ activities: Activity[] }>(
+    GET_ACTIVITIES_DATA,
+    { client },
+  );
+  const activities = data?.activities || [];
 
-  const goToNextStory = () => {
+  const goToNextStory = useCallback(() => {
     setCurrentStoryIndex((prevIndex) =>
-      prevIndex === stories.length - 1 ? 0 : prevIndex + 1,
+      prevIndex === activities.length - 1 ? 0 : prevIndex + 1,
     );
-  };
+  }, [activities.length]);
 
   const goToPrevStory = () => {
     setCurrentStoryIndex((prevIndex) =>
-      prevIndex === 0 ? stories.length - 1 : prevIndex - 1,
+      prevIndex === 0 ? activities.length - 1 : prevIndex - 1,
     );
   };
 
@@ -28,26 +49,27 @@ export default function InstagramStoryUI() {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, [currentStoryIndex]);
+  }, [currentStoryIndex, goToNextStory]);
 
-  // Handle touch start
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
 
-  // Handle touch end and detect swipe direction
   const handleTouchEnd = (e: React.TouchEvent) => {
     touchEndX.current = e.changedTouches[0].clientX;
     const deltaX = touchEndX.current - touchStartX.current;
 
     if (deltaX > 50) {
-      goToPrevStory(); // Swipe Right → Go to Previous Story
+      goToPrevStory();
     } else if (deltaX < -50) {
-      goToNextStory(); // Swipe Left → Go to Next Story
+      goToNextStory();
     }
   };
 
-  const currentStory = stories[currentStoryIndex];
+  const currentStory = activities[currentStoryIndex];
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div
@@ -62,27 +84,12 @@ export default function InstagramStoryUI() {
           className="hidden md:flex w-[80px] h-[80px] items-center justify-center bg-secondary-500 rounded-full text-primary-300 shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
           aria-label="Previous story"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-10 w-10"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
+          <ArrowLeft className="h-10 w-10" />
         </button>
         <div className="rounded-t-3xl overflow-hidden w-[311px] h-[496px] md:w-[512px] md:h-[680px] lg:w-[560px] shadow-2xl mx-auto">
-          <div
-            className={`${currentStory.bgColor} h-full relative px-4 md:px-6 py-10`}
-          >
+          <div className="bg-secondary-500 h-full relative px-4 md:px-6 py-10">
             <div className="flex space-x-1">
-              {stories.map((_, index) => (
+              {activities.map((_, index) => (
                 <div
                   key={index}
                   className={`h-1 flex-1 rounded-full ${
@@ -101,23 +108,30 @@ export default function InstagramStoryUI() {
                 目擊動態
               </span>
             </div>
-            <div className="flex justify-center mt-[44px] custom-font-bold leading-[1.6] tracking-[0.02rem]">
-              <p className="text-xl text-white md:text-3xl font-bold">
-                {currentStory.date}
-              </p>
-            </div>
+            {currentStory?.date && (
+              <div className="flex justify-center mt-[44px] custom-font-bold leading-[1.6] tracking-[0.02rem] text-xl text-white md:text-3xl">
+                {currentStory?.date || ''}
+              </div>
+            )}
             <div className="flex flex-col items-center mt-10 gap-4 custom-font-bold leading-[1.6] tracking-[0.02rem] text-lg md:text-[28px]">
-              <div className="bg-white px-4 py-1 md:px-5 md:py-2">
-                {currentStory.title}
-              </div>
-              <div className="bg-white px-4 py-1 md:px-5 md:py-2">
-                {currentStory.subtitle}
-              </div>
+              {currentStory?.title && (
+                <div className="bg-white px-4 py-1 md:px-5 md:py-2">
+                  {currentStory?.title || ''}
+                </div>
+              )}
+              {currentStory?.description && (
+                <div className="bg-white px-4 py-1 md:px-5 md:py-2">
+                  {currentStory?.description || ''}
+                </div>
+              )}
             </div>
             <div className="absolute bottom-16 left-0 right-0 flex justify-center custom-font-bold leading-[1.6] tracking-[0.02rem]">
-              <button className="bg-primary-300 text-secondary-500 px-8 py-3 rounded-full text-lg">
+              <Link
+                href={currentStory?.post_link || '/'}
+                className="bg-primary-300 text-secondary-500 px-8 py-3 rounded-full text-lg"
+              >
                 VIEW POST
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -126,20 +140,7 @@ export default function InstagramStoryUI() {
           className="hidden md:flex w-[80px] h-[80px] flex items-center justify-center bg-secondary-500 rounded-full text-primary-300 shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
           aria-label="Next story"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-10 w-10"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
+          <ArrowRight className="h-10 w-10" />
         </button>
       </div>
     </div>

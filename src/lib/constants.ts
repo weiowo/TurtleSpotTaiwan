@@ -1,9 +1,9 @@
-interface Story {
+export type Story = {
   date: string;
   title: string;
   subtitle: string;
   bgColor: string;
-}
+};
 
 export const stories: Story[] = [
   {
@@ -71,7 +71,15 @@ export const defaultImages: ImageItem[] = [
   { name: 'Turtle-1', imageUrl: '/images/turtle1.jpeg' },
   { name: 'Turtle-2', imageUrl: '/images/turtle2.jpeg' },
   { name: 'Turtle-3', imageUrl: '/images/turtle-hero.jpeg' },
-  { name: 'Turtle-4', imageUrl: '/images/turtle1-1.jpeg' },
-  { name: 'Turtle-5', imageUrl: '/images/turtle2-2.jpeg' },
-  { name: 'Turtle-6', imageUrl: '/images/turtle-hero2.jpeg' },
+  { name: 'Turtle-4', imageUrl: '/images/turtle1.jpeg' },
+  { name: 'Turtle-5', imageUrl: '/images/turtle2.jpeg' },
+  { name: 'Turtle-6', imageUrl: '/images/turtle-hero.jpeg' },
 ];
+
+export type Activity = {
+  date: string;
+  title: string;
+  description: string;
+  post_link: string;
+  bgColor?: string;
+};
