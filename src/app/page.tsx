@@ -2,7 +2,7 @@ import TurtleProfile from '@/components/TurtleProfile';
 import Banner from '@/components/Banner';
 import Carousel from '@/components/Carousel';
 import Location from '@/components/Location';
-// import Stories from '@/components/Stories';
+import Stories from '@/components/Stories';
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <TurtleProfile />
       <Carousel />
       <Location />
-      {/* <Stories /> */}
+      <Stories />
     </div>
   );
 }
