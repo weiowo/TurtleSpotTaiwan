@@ -64,7 +64,7 @@ export default function Navbar() {
       </header>
       <div
         className={cn(
-          'bg-secondary-500 w-full text-white overflow-hidden transition-all duration-300 ease-in-out rounded-b-[40px]',
+          'bg-secondary-500 w-full text-white overflow-hidden transition-all duration-300 ease-in-out rounded-b-3xl lg:rounded-b-[40px]',
           isMenuOpen ? 'max-h-screen' : 'max-h-0',
         )}
       >
