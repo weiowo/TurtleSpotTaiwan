@@ -198,7 +198,7 @@ const Carousel: React.FC = () => {
         <div className="flex items-center justify-center gap-6 mt-4">
           <button
             onClick={() => {
-              nextSlide();
+              prevSlide();
               resetAutoplay();
             }}
             className="bg-secondary-500 text-white lg:hidden w-12 h-12 rounded-full flex items-center justify-center z-20 transition-all"
