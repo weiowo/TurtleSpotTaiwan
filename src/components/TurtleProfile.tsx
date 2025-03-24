@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function TurtleProfile() {
   return (
     <div className="w-full px-0 md:px-10 lg:px-0 flex flex-cpl items-center justify-center">
-      <div className="w-full max-w-[922px] h-[800px] rounded-lg">
+      <div className="w-full max-w-[922px] h-full lg:h-[800px] rounded-lg">
         <div className="bg-secondary-100 p-4 w-full lg:w-1/3 rounded-t-[20px]">
           <h1 className="text-xl custom-font-bold text-center space-x-4 leading-[1.6] tracking-[0.02rem]">
             <span>淡定哥</span>
@@ -54,23 +54,24 @@ export default function TurtleProfile() {
               <Image
                 src="/images/turtle1.jpeg"
                 alt="turtle1"
-                layout="fill"
-                objectFit="cover"
-                className="rounded"
+                fill
+                className="rounded object-cover"
               />
             </div>
+            <div className="hidden md:block mt-4 h-[1px] w-full bg-primary-300" />
           </div>
           <div className="col-span-1 space-y-4">
             <p className="text-lg custom-font-bold">右臉：</p>
             <div className="relative w-[327px] h-[240px] md:w-[312px] md:h-[200px] lg:h-[262px] lg:w-[409px]">
-              <Image
-                src="/images/turtle2.jpeg"
-                alt="turtle2"
-                layout="fill"
-                objectFit="cover"
-                className="rounded"
-              />
-            </div>
+  <Image
+    src="/images/turtle2.jpeg"
+    alt="turtle2"
+    fill
+    className="rounded object-cover"
+  />
+</div>
+
+            <div className="hidden md:block mt-4 h-[1px] w-full bg-primary-300" />
           </div>
         </div>
       </div>

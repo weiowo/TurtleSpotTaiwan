@@ -61,3 +61,17 @@ export const stories: Story[] = [
     bgColor: 'bg-black',
   },
 ];
+
+type ImageItem = {
+  name: string;
+  imageUrl: string;
+};
+
+export const defaultImages: ImageItem[] = [
+  { name: 'Turtle-1', imageUrl: '/images/turtle1.jpeg' },
+  { name: 'Turtle-2', imageUrl: '/images/turtle2.jpeg' },
+  { name: 'Turtle-3', imageUrl: '/images/turtle-hero.jpeg' },
+  { name: 'Turtle-4', imageUrl: '/images/turtle1-1.jpeg' },
+  { name: 'Turtle-5', imageUrl: '/images/turtle2-2.jpeg' },
+  { name: 'Turtle-6', imageUrl: '/images/turtle-hero2.jpeg' },
+];

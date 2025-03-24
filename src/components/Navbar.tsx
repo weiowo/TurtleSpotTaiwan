@@ -13,11 +13,9 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const currentPath = usePathname();
-  console.log('currentPath', currentPath);
 
   return (
     <div className="w-full">
-      {/* Header Bar */}
       <header
         className={cn(
           'w-full h-10 lg:h-16 relative transition-colors duration-300 flex items-center justify-between custom-font-bold ',
@@ -47,13 +45,13 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center text-secondary-50 bg-secondary-500 text-primary-50 h-full custom-font-bold tracking-[0.1rem] rounded-bl-2xl">
-          <button className="px-4 lg:px-[26px] h-full">EN</button>
-          <button className="px-4 lg:px-[26px] border-x border-[#363841] h-full">
+          <button className="px-3 lg:px-[26px] h-full">EN</button>
+          <button className="px-3 lg:px-[26px] border-x border-[#363841] h-full">
             <Audio className="h-6 w-6 " />
           </button>
           <button
             onClick={toggleMenu}
-            className="flex items-center gap-[10px] px-4 lg:px-[26px] h-full"
+            className="flex items-center gap-[10px] px-3 lg:px-[26px] h-full"
           >
             {isMenuOpen ? (
               <Close className="h-6 w-6" />
@@ -64,8 +62,6 @@ export default function Navbar() {
           </button>
         </div>
       </header>
-
-      {/* Full-screen Menu Overlay */}
       <div
         className={cn(
           'bg-secondary-500 w-full text-white overflow-hidden transition-all duration-300 ease-in-out rounded-b-[40px]',
