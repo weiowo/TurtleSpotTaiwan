@@ -157,7 +157,10 @@ const Carousel: React.FC = () => {
               return (
                 <div
                   key={`slide-${index}`}
-                  className="relative flex-grow-0 flex-shrink-0 transition-all rounded-lg duration-500 px-4 flex justify-center items-center"
+                  className={cn(
+                    'relative flex-grow-0 flex-shrink-0 transition-all rounded-lg duration-500 px-4 flex justify-center items-center',
+                    isCurrent ? '' : 'opacity-50',
+                  )}
                   style={{
                     width: dimension.width,
                     transform: isCurrent ? `scale(${720 / 680})` : 'scale(1)',
