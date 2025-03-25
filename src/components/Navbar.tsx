@@ -73,7 +73,7 @@ export default function Navbar() {
           isMenuOpen ? 'max-h-screen' : 'max-h-0',
         )}
       >
-        <div className="max-w-[1038px] mx-auto p-10 lg:py-[120px] lg:px-0">
+        <div className="max-w-[1038px] mx-auto p-10 lg:py-[120px] lg:px-5 xl:px-0">
           <div className="flex-col items-end flex lg:flex-row lg:justify-between gap-4 lg:gap-[80px]">
             {[
               { label: '海龜地圖', text: 'Map', link: '/' },
