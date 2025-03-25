@@ -25,11 +25,11 @@ export default function Spot({
         )}
       >
         <div className="flex flex-col items-center justify-center w-full h-full transform rotate-45">
-          {subText && (
-            <div className="text-base custom-font-medium">{subText}</div>
-          )}
-          <div className="text-[28px] lg:text-[40px] custom-font-bold leading-[1.6] tracking-[0.02rem] lg:leading-[1.4] lg:tracking-0">
-            {text}
+          <div className="text-base custom-font-medium lg:leading-[1.8] lg:tracking-0">
+            {subText || ''}
+          </div>
+          <div className="text-[28px] lg:text-[40px] custom-font-bold leading-[1.6] tracking-[0.02rem] lg:leading-[1.4] lg:tracking-0 mt-[2px]">
+            {text || ''}
           </div>
         </div>
       </div>

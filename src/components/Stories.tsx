@@ -9,6 +9,7 @@ import Link from 'next/link';
 import ArrowLeft from '@/components/icons/arrow-left.svg';
 import ArrowRight from '@/components/icons/arrow-right.svg';
 import { Activity } from '@/lib/constants';
+import { defaultStories } from '@/lib/constants';
 
 const GET_ACTIVITIES_DATA = gql`
   {
@@ -29,7 +30,7 @@ export default function Stories() {
     GET_ACTIVITIES_DATA,
     { client },
   );
-  const activities = data?.activities || [];
+  const activities = data?.activities || defaultStories || [];
 
   const goToNextStory = useCallback(() => {
     setCurrentStoryIndex((prevIndex) =>
@@ -77,7 +78,7 @@ export default function Stories() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <Marquee>Witness story Witness story</Marquee>
+      <Marquee>Witness story Witness story Witness story</Marquee>
       <div className="absolute bottom-0 flex items-center gap-2 lg:gap-10">
         <button
           onClick={goToPrevStory}
@@ -113,7 +114,7 @@ export default function Stories() {
                 {currentStory?.date || ''}
               </div>
             )}
-            <div className="flex flex-col items-center mt-10 gap-4 custom-font-bold leading-[1.6] tracking-[0.02rem] text-lg md:text-[28px]">
+            <div className="flex flex-col items-center mt-6 md:mt-10 gap-[11px] custom-font-bold leading-[1.6] tracking-[0.02rem] text-lg md:text-[28px]">
               {currentStory?.title && (
                 <div className="bg-white px-4 py-1 md:px-5 md:py-2">
                   {currentStory?.title || ''}
@@ -125,10 +126,10 @@ export default function Stories() {
                 </div>
               )}
             </div>
-            <div className="absolute bottom-16 left-0 right-0 flex justify-center custom-font-bold leading-[1.6] tracking-[0.02rem]">
+            <div className="absolute bottom-10 md:bottom-[80px] left-0 right-0 flex justify-center custom-font-bold leading-[1.6] tracking-[0.02rem]">
               <Link
                 href={currentStory?.post_link || '/'}
-                className="bg-primary-300 text-secondary-500 px-8 py-3 rounded-full text-lg"
+                className="bg-primary-300 text-secondary-500 px-8 py-3 rounded-full text-sm sm:text-lg"
               >
                 VIEW POST
               </Link>

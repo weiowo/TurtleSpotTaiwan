@@ -5,6 +5,7 @@ import ArrowLeft from '@/components/icons/arrow-left.svg';
 import ArrowRight from '@/components/icons/arrow-right.svg';
 import { defaultImages } from '@/lib/constants';
 import Image from 'next/image';
+import cn from '@/lib/cn';
 
 const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -207,7 +208,7 @@ const Carousel: React.FC = () => {
             <ArrowLeft className="h-6 w-6 text-secondary-50" />
           </button>
 
-          <div className="flex space-x-2 z-20 mt-10 h-full">
+          <div className="flex space-x-[6px] lg:space-x-[10px] z-20 mt-10 h-full">
             {defaultImages.map((_, index) => (
               <button
                 key={index}
@@ -215,9 +216,12 @@ const Carousel: React.FC = () => {
                   goToSlide(index);
                   resetAutoplay();
                 }}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  currentIndex === index ? 'w-6 bg-secondary-500' : 'bg-white'
-                }`}
+                className={cn(
+                  'w-[6px] h-[6px] lg:w-[10px] lg:h-[10px] rounded-full transition-all',
+                  currentIndex === index
+                    ? 'w-3 lg:w-6 bg-secondary-500'
+                    : 'bg-white',
+                )}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}

@@ -6,7 +6,7 @@ export default function Location() {
   return (
     <div className="relative w-full h-[764px] lg:h-[840px] rounded-b-[40px] bg-secondary-500 overflow-hidden flex items-center">
       <Marquee className="text-secondary-300">
-        Favorite Dive Site Favorite Dive Site
+        Favorite Dive Site Favorite Dive Site Favorite Dive Site
       </Marquee>
       <Spot
         text="花瓶岩"

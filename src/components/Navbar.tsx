@@ -47,7 +47,12 @@ export default function Navbar() {
         <div className="flex items-center text-secondary-50 bg-secondary-500 text-primary-50 h-full custom-font-bold tracking-[0.1rem] rounded-bl-2xl">
           <button className="px-3 lg:px-[26px] h-full">EN</button>
           <button className="px-3 lg:px-[26px] border-x border-[#363841] h-full">
-            <Audio className="h-6 w-6 " />
+            <Audio
+              className={cn(
+                'h-6 w-6',
+                isMenuOpen ? 'text-secondary-50' : 'text-[#000000]',
+              )}
+            />
           </button>
           <button
             onClick={toggleMenu}
